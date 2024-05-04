@@ -1,4 +1,4 @@
-name: Run pufferpanel
+name: Run VSCode with Agro Tunnel
 
 on:
   push:
@@ -30,7 +30,7 @@ jobs:
         env:
           PORT: 10000
         run: |
-          code-server --port $PORT --disable-telemetry --auth 123 &
+          code-server --port $PORT --disable-telemetry --auth none &
 
       - name: Delay before creating tunnel
         run: sleep 10
@@ -39,8 +39,11 @@ jobs:
         env:
           PORT: 10000
         run: |
+          ./cloudflared tunnel --url http://127.0.0.1:$PORT --metrics localhost:45678
+
+      - name: Keep alive
+        run: |
           while true; do
-            ./cloudflared tunnel --url http://127.0.0.1:$PORT --metrics localhost:45678
-            sleep 31536000 # Um ano em segundos
+            echo "Teste"
+            sleep 10
           done
-          
