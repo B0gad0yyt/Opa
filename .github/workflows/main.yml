@@ -1,4 +1,4 @@
-name: Run pufferpanel 2.0
+name: Run pufferpanel
 
 on:
   push:
