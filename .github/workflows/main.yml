@@ -1,4 +1,4 @@
-name: Run pufferpanel in vscode
+name: Run pufferpanel
 
 on:
   push:
